@@ -5,7 +5,7 @@ const CatRow = ({file}) => {
   return (
     <tr>
       <td>
-        <img src={file.thumbnails.w160} alt="Title"/>
+        <img src={file.thumbnails.w160} alt={file.title}/>
       </td>
       <td>
         <h3>{file.title}</h3>
