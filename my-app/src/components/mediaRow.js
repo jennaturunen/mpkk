@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
-const CatRow = ({file}) => {
+const mediaRow = ({file}) => {
   return (
     <tr>
       <td>
@@ -21,8 +21,8 @@ const CatRow = ({file}) => {
 };
 
 
-CatRow.propTypes = {
+mediaRow.propTypes = {
   file: PropTypes.object,
 };
 
-export default CatRow;
+export default mediaRow;

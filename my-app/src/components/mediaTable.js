@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import CatRow from './catRow';
+import mediaRow from './mediaRow';
 
 const baseUrl = 'http://media.mw.metropolia.fi/wbma/';
 
-const CatTable = () => {
+const mediaTable = () => {
   const [picArray, setPicArray] = useState([]);
   const loadMedia = async () => {
     // Hae kaikki kuvat -> saadaan selville kuvan id
@@ -26,11 +26,11 @@ const CatTable = () => {
     <table>
       <tbody>
         {
-          picArray.map((file, index) => <CatRow file={file} key={index}/>)
+          picArray.map((file, index) => <mediaRow file={file} key={index}/>)
         }
       </tbody>
     </table>
   );
 };
 
-export default CatTable;
+export default mediaTable;

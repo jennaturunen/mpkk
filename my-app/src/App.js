@@ -2,12 +2,12 @@
 
 import React from 'react';
 import './App.css';
-import CatTable from './components/catTable';
+import mediaTable from './components/mediaTable';
 
 
 const App = () => {
   return (
-    <CatTable />
+    <mediaTable />
   );
 };
 
