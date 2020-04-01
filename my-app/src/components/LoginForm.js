@@ -4,6 +4,7 @@ import useLoginForm from '../hooks/LoginHooks';
 import {login} from '../hooks/ApiHooks';
 import {withRouter} from 'react-router-dom';
 import {MediaContext} from '../contexts/MediaContext';
+import {Button, Grid, TextField} from '@material-ui/core';
 
 const LoginForm = (history) => {
   // eslint-disable-next-line no-unused-vars
@@ -23,26 +24,45 @@ const LoginForm = (history) => {
 
   const {inputs, handleInputChange, handleSubmit} = useLoginForm(doLogin);
   return (
-    <>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="username"
-          placeholder="Username"
-          onChange={handleInputChange}
-          value={inputs.username}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          onChange={handleInputChange}
-          value={inputs.password}
-        />
-        <button type="submit">Login</button>
-      </form>
-    </>
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <h1>Login</h1>
+      </Grid>
+      <Grid item xs={12}>
+        <form onSubmit={handleSubmit}>
+          <Grid container spacing={2}>
+            <Grid container item xs={12}>
+              <TextField
+                type="text"
+                name="username"
+                label="Username"
+                onChange={handleInputChange}
+                value={inputs.username}
+                fullWidth
+              />
+            </Grid>
+            <Grid container item xs={12}>
+              <TextField
+                type="password"
+                name="password"
+                label="Password"
+                onChange={handleInputChange}
+                value={inputs.password}
+                fullWidth
+              />
+            </Grid>
+            <Grid container item xs={12}>
+              <Button fullWidth
+                color="primary"
+                type="submit"
+                variant="contained">
+                Login
+              </Button>
+            </Grid>
+          </Grid>
+        </form>
+      </Grid>
+    </Grid>
   );
 };
 

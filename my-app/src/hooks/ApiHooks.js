@@ -103,6 +103,13 @@ const checkToken = async (token) => {
   }
 };
 
+const getAvatarImage = async (id) => {
+  console.log('ai', id);
+  const response = await fetch(baseUrl + 'tags/avatar_' + id);
+  return await response.json();
+};
+
+
 export {
   useAllMedia,
   useSingleMedia,
@@ -110,4 +117,5 @@ export {
   login,
   checkUserAvailable,
   checkToken,
+  getAvatarImage,
 };
