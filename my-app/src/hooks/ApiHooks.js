@@ -13,7 +13,7 @@ const useAllMedia = () => {
       const response = await fetch(baseUrl + 'media/' + item.file_id);
       return await response.json();
     }));
-    console.log(items);
+    console.log('use all media', items);
     setData(items);
   };
 
@@ -108,7 +108,6 @@ const getAvatarImage = async (id) => {
   const response = await fetch(baseUrl + 'tags/avatar_' + id);
   return await response.json();
 };
-
 
 export {
   useAllMedia,

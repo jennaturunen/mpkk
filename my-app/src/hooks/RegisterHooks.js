@@ -4,6 +4,7 @@ const useSignUpForm = (callback) => {
   const [inputs, setInputs] = useState({
     username: '',
     password: '',
+    confirm: '',
     email: '',
     full_name: '',
   });
@@ -11,6 +12,7 @@ const useSignUpForm = (callback) => {
     if (event) {
       event.preventDefault();
     }
+    delete inputs.confirm;
     callback();
   };
   const handleInputChange = (event) => {
