@@ -15,15 +15,17 @@ const App = () => {
     // eslint-disable-next-line no-undef
     <Router basename={process.env.PUBLIC_URL}>
       <MediaProvider>
-        <Container maxWidth="sm">
+        <Container maxWidth="md">
           <Nav />
-          <Switch>
-            <Route path="/" exact component={Login} />
-            <Route path="/home" component={Home}/>
-            <Route path="/profile" component={Profile}/>
-            <Route path="/single/:id" component={Single}/>
-            <Route path="/logout" component={Logout}/>
-          </Switch>
+          <main>
+            <Switch>
+              <Route path="/" exact component={Login} />
+              <Route path="/home" component={Home}/>
+              <Route path="/profile" component={Profile}/>
+              <Route path="/single/:id" component={Single}/>
+              <Route path="/logout" component={Logout}/>
+            </Switch>
+          </main>
         </Container>
       </MediaProvider>
     </Router>

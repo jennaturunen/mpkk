@@ -6,7 +6,7 @@ import {withRouter} from 'react-router-dom';
 import {MediaContext} from '../contexts/MediaContext';
 import {Button, Grid, TextField} from '@material-ui/core';
 
-const RegisterForm = (history) => {
+const RegisterForm = ({history}) => {
   // eslint-disable-next-line no-unused-vars
   const [user, setUser] = useContext(MediaContext);
   const doRegister = async () => {

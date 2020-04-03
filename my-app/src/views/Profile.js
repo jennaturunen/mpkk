@@ -1,19 +1,29 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {MediaContext} from '../contexts/MediaContext';
-// eslint-disable-next-line max-len
-import {Card, CardMedia, CardContent, makeStyles, Typography} from '@material-ui/core';
+import {
+  Card,
+  CardMedia,
+  CardContent,
+  Typography,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
+} from '@material-ui/core';
 import {getAvatarImage} from '../hooks/ApiHooks';
+import PersonIcon from '@material-ui/icons/Person';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import EmailIcon from '@material-ui/icons/Email';
+import {makeStyles} from '@material-ui/core/styles';
+import indigo from '@material-ui/core/colors/indigo';
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 345,
+const useStyles = makeStyles((theme) => ({
+  icon: {
+    color: indigo[800],
   },
-  media: {
-    height: 300,
-  },
-});
+}));
 
 const Profile = () => {
   const classes = useStyles();
@@ -26,7 +36,7 @@ const Profile = () => {
         setAvatar(await getAvatarImage(user.user_id));
       }
     })();
-  }, []);
+  }, [user]);
 
   return (
     <>
@@ -37,18 +47,32 @@ const Profile = () => {
       {user !== null && avatar.length > 0 &&
       <Card>
         <CardMedia
-          className={classes.media}
+          component="img"
           image={mediaUrl + avatar[0].filename}
+          alt="Avatar image"
           title="Avatar image"
         />
         <CardContent>
-          <Typography component="h1" variant="h5">Profile</Typography>
-          <Typography variant="body2"
-            color="textSecondary">Username: {user.username}</Typography>
-          <Typography variant="body2"
-            color="textSecondary">Email: {user.email}</Typography>
-          <Typography variant="body2"
-            color="textSecondary">Full name: {user.full_name}</Typography>
+          <List>
+            <ListItem>
+              <ListItemIcon>
+                <AccountCircleIcon fontSize="large" className={classes.icon}/>
+              </ListItemIcon>
+              <ListItemText primary={user.username}/>
+            </ListItem>
+            <ListItem>
+              <ListItemIcon>
+                <EmailIcon fontSize="large" className={classes.icon}/>
+              </ListItemIcon>
+              <ListItemText primary={user.email}/>
+            </ListItem>
+            <ListItem>
+              <ListItemIcon>
+                <PersonIcon fontSize="large" className={classes.icon}/>
+              </ListItemIcon>
+              <ListItemText primary={user.full_name}/>
+            </ListItem>
+          </List>
         </CardContent>
       </Card>
       }
