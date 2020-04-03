@@ -17,13 +17,15 @@ const App = () => {
       <MediaProvider>
         <Container maxWidth="sm">
           <Nav />
-          <Switch>
-            <Route path="/" exact component={Login} />
-            <Route path="/home" component={Home}/>
-            <Route path="/profile" component={Profile}/>
-            <Route path="/single/:id" component={Single}/>
-            <Route path="/logout" component={Logout}/>
-          </Switch>
+          <main>
+            <Switch>
+              <Route path="/" exact component={Login} />
+              <Route path="/home" component={Home}/>
+              <Route path="/profile" component={Profile}/>
+              <Route path="/single/:id" component={Single}/>
+              <Route path="/logout" component={Logout}/>
+            </Switch>
+          </main>
         </Container>
       </MediaProvider>
     </Router>

@@ -11,14 +11,23 @@ import {
   ListItemIcon,
 } from '@material-ui/core';
 import {getAvatarImage} from '../hooks/ApiHooks';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import PersonIcon from '@material-ui/icons/Person';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import EmailIcon from '@material-ui/icons/Email';
+import {makeStyles} from '@material-ui/core/styles';
+import indigo from '@material-ui/core/colors/indigo';
 
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
+const useStyles = makeStyles((theme) => ({
+  icon: {
+    color: indigo[800],
+  },
+}));
+
 const Profile = () => {
+  const classes = useStyles();
   const [user] = useContext(MediaContext);
   const [avatar, setAvatar] = useState([]);
 
@@ -48,19 +57,19 @@ const Profile = () => {
             <List>
               <ListItem>
                 <ListItemIcon>
-                  <AccountBoxIcon/>
+                  <AccountCircleIcon fontSize="large" className={classes.icon}/>
                 </ListItemIcon>
                 <ListItemText primary={user.username}/>
               </ListItem>
               <ListItem>
                 <ListItemIcon>
-                  <EmailIcon/>
+                  <EmailIcon fontSize="large" className={classes.icon}/>
                 </ListItemIcon>
                 <ListItemText primary={user.email}/>
               </ListItem>
               <ListItem>
                 <ListItemIcon>
-                  <PersonIcon/>
+                  <PersonIcon fontSize="large" className={classes.icon}/>
                 </ListItemIcon>
                 <ListItemText primary={user.full_name}/>
               </ListItem>
