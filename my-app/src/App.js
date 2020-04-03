@@ -15,7 +15,7 @@ const App = () => {
     // eslint-disable-next-line no-undef
     <Router basename={process.env.PUBLIC_URL}>
       <MediaProvider>
-        <Container maxWidth="sm">
+        <Container maxWidth="md">
           <Nav />
           <main>
             <Switch>
