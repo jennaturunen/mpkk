@@ -11,6 +11,7 @@ import {
   ListItemIcon,
 } from '@material-ui/core';
 import {getAvatarImage} from '../hooks/ApiHooks';
+import ProfileForm from '../components/ProfileForm';
 import PersonIcon from '@material-ui/icons/Person';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import EmailIcon from '@material-ui/icons/Email';
@@ -77,6 +78,7 @@ const Profile = () => {
           </CardContent>
         </Card>
       }
+      <ProfileForm />
     </>
   );
 };

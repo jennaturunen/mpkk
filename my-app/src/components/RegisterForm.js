@@ -14,7 +14,8 @@ const RegisterForm = ({history}) => {
 
   const doRegister = async () => {
     try {
-      await checkUserAvailable(inputs.username);
+      // await checkUserAvailable(inputs.username);
+      delete inputs.confirm;
       await register(inputs);
       // Kirjaudu automaattisesti sisään
       const userData = await login(inputs);
@@ -46,6 +47,7 @@ const RegisterForm = ({history}) => {
         console.log(response);
         return response.available;
       } catch (e) {
+        // kun backendiin ei saada yhteyttä -> data menee suoraan backendin hoidettavaksi
         console.log(e.message);
         return true;
       }
