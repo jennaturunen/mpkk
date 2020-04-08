@@ -21,6 +21,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/Home';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import PublishIcon from '@material-ui/icons/Publish';
 import indigo from '@material-ui/core/colors/indigo';
 
 const useStyles = makeStyles((theme) => ({
@@ -123,20 +124,36 @@ const Nav = ({history}) => {
             <ListItemText primary="Home"/>
           </ListItem>
           {user !== null &&
-            <ListItem
-              button
-              component={RouterLink}
-              onClick={toggleDrawer(false)}
-              to="/profile"
-              className={classes.drawerIcons}
-            >
-              <ListItemIcon>
-                <AccountCircleIcon
-                  fontSize="large"
-                  style={{color: indigo[800]}}/>
-              </ListItemIcon>
-              <ListItemText primary="Profile"/>
-            </ListItem>
+              <>
+                <ListItem
+                  button
+                  component={RouterLink}
+                  onClick={toggleDrawer(false)}
+                  to="/profile"
+                  className={classes.drawerIcons}
+                >
+                  <ListItemIcon>
+                    <AccountCircleIcon
+                      fontSize="large"
+                      style={{color: indigo[800]}}/>
+                  </ListItemIcon>
+                  <ListItemText primary="Profile"/>
+                </ListItem>
+                <ListItem
+                  button
+                  component={RouterLink}
+                  onClick={toggleDrawer(false)}
+                  to="/upload"
+                  className={classes.drawerIcons}
+                >
+                  <ListItemIcon>
+                    <PublishIcon
+                      fontSize="large"
+                      style={{color: indigo[800]}}/>
+                  </ListItemIcon>
+                  <ListItemText primary="Upload"/>
+                </ListItem>
+              </>
           }
         </List>
       </Drawer>

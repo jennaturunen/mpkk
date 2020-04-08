@@ -128,6 +128,29 @@ const updateProfile = async (inputs, token) => {
   }
 };
 
+const uploadFile = async (inputs, token) => {
+  const fd = new FormData();
+  fd.append('title', inputs.title);
+  fd.append('description', inputs.description);
+  fd.append('file', inputs.file);
+
+  const fetchOptions = {
+    method: 'POST',
+    body: fd,
+    headers: {
+      'x-access-token': token,
+    },
+  };
+
+  try {
+    const response = await fetch(baseUrl + 'media', fetchOptions);
+    const json = await response.json();
+    if (!response.ok) throw new Error(json.message + ': ' + json.error);
+    return json;
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
 
 export {
   useAllMedia,
@@ -138,4 +161,5 @@ export {
   checkToken,
   getAvatarImage,
   updateProfile,
+  uploadFile,
 };

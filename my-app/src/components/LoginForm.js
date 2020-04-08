@@ -5,6 +5,7 @@ import {login} from '../hooks/ApiHooks';
 import {withRouter} from 'react-router-dom';
 import {MediaContext} from '../contexts/MediaContext';
 import {Button, Grid, TextField} from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 
 const LoginForm = ({history}) => {
   // eslint-disable-next-line no-unused-vars
@@ -26,7 +27,10 @@ const LoginForm = ({history}) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <h1>Login</h1>
+        <Typography
+          component="h1"
+          variant="h2"
+          gutterBottom>Login</Typography>
       </Grid>
       <Grid item xs={12}>
         <form onSubmit={handleSubmit}>

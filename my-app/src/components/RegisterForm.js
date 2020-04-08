@@ -7,6 +7,7 @@ import {withRouter} from 'react-router-dom';
 import {MediaContext} from '../contexts/MediaContext';
 import {Button, Grid} from '@material-ui/core';
 import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+import Typography from '@material-ui/core/Typography';
 
 const RegisterForm = ({history}) => {
   // eslint-disable-next-line no-unused-vars
@@ -58,7 +59,10 @@ const RegisterForm = ({history}) => {
     <>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <h1>Register</h1>
+          <Typography
+            component="h1"
+            variant="h2"
+            gutterBottom>Register</Typography>
         </Grid>
         <Grid item xs={12}>
           <ValidatorForm

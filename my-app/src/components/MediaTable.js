@@ -18,8 +18,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
   gridList: {
-    width: '100vw',
-    height: '100vh',
+    width: '100%',
+    height: '100%',
   },
   icon: {
     color: 'rgba(255, 255, 255, 0.54)',
@@ -37,7 +37,7 @@ const MediaTable = () => {
   return (
     <div className={classes.root}>
       <GridList
-        cellHeight={200}
+        cellHeight={180}
         className={classes.gridList}
         cols={matches ? 3 : 2}>
         <GridListTile key="Subheader" cols={3} style={{height: 'auto'}}>
