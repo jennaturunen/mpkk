@@ -6,7 +6,7 @@ const useAllMedia = () => {
   const [data, setData] = useState([]);
   const fetchUrl = async () => {
     // Hae kaikki kuvat -> saadaan selville kuvan id
-    const response = await fetch(baseUrl + 'media');
+    const response = await fetch(baseUrl + 'tags/mpjakk');
     const json = await response.json();
     // Haetaan yksittäiset kuvat, jotta saadaan thumbnailit
     const items = await Promise.all(json.map(async (item) => {
@@ -25,7 +25,7 @@ const useAllMedia = () => {
 };
 
 const useSingleMedia = (id) => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState(null);
   // fetch data from api
   const fetchUrl = async (fileid) => {
     const response = await fetch(baseUrl + 'media/' + fileid);
@@ -104,7 +104,6 @@ const checkToken = async (token) => {
 };
 
 const getAvatarImage = async (id) => {
-  console.log('ai', id);
   const response = await fetch(baseUrl + 'tags/avatar_' + id);
   return await response.json();
 };
@@ -128,6 +127,30 @@ const updateProfile = async (inputs, token) => {
   }
 };
 
+// eslint-disable-next-line camelcase
+const addTag = async (file_id, tag, token) => {
+  const fetchOptionsTag = {
+    method: 'POST',
+    body: JSON.stringify({
+      // Propertyn nimi on sama kuin muuttujan nimi,ei tartte kirjoittaa tag:tag
+      file_id,
+      tag,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+      'x-access-token': token,
+    },
+  };
+
+  try {
+    const tagResponse = await fetch(baseUrl + 'tags', fetchOptionsTag);
+    const tagJson = await tagResponse.json();
+    console.log('jsontag', tagJson);
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
+
 const uploadFile = async (inputs, token) => {
   const fd = new FormData();
   fd.append('title', inputs.title);
@@ -146,7 +169,8 @@ const uploadFile = async (inputs, token) => {
     const response = await fetch(baseUrl + 'media', fetchOptions);
     const json = await response.json();
     if (!response.ok) throw new Error(json.message + ': ' + json.error);
-    return json;
+    const tagJson = addTag(json.file_id, 'mpjakk', token);
+    return {json, tagJson};
   } catch (e) {
     throw new Error(e.message);
   }
@@ -162,4 +186,5 @@ export {
   getAvatarImage,
   updateProfile,
   uploadFile,
+  addTag,
 };

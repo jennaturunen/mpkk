@@ -8,7 +8,7 @@ import {
   List,
   ListItem,
   ListItemText,
-  ListItemIcon,
+  ListItemIcon, Button,
 } from '@material-ui/core';
 import {getAvatarImage} from '../hooks/ApiHooks';
 import ProfileForm from '../components/ProfileForm';
@@ -17,6 +17,8 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import EmailIcon from '@material-ui/icons/Email';
 import {makeStyles} from '@material-ui/core/styles';
 import indigo from '@material-ui/core/colors/indigo';
+import PropTypes from 'prop-types';
+import BackButton from '../components/BackButton';
 
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
@@ -27,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Profile = () => {
+const Profile = ({history}) => {
   const classes = useStyles();
   const [user] = useContext(MediaContext);
   const [avatar, setAvatar] = useState([]);
@@ -42,6 +44,7 @@ const Profile = () => {
 
   return (
     <>
+      <BackButton />
       <Typography
         component="h1"
         variant="h2"
@@ -82,5 +85,10 @@ const Profile = () => {
     </>
   );
 };
+
+Profile.propTypes = {
+  history: PropTypes.object,
+};
+
 
 export default Profile;

@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import {uploadFile} from '../hooks/ApiHooks';
 import {Button, CircularProgress, Grid, Slider} from '@material-ui/core';
 import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+import BackButton from '../components/BackButton';
 
 const Upload = ({history}) => {
   const [loading, setLoading] = useState(false);
@@ -12,7 +13,21 @@ const Upload = ({history}) => {
     console.log('input up', inputs);
     setLoading(true);
     try {
-      const result = await uploadFile(inputs, localStorage.getItem('token'));
+      const uploadObject = {
+        title: inputs.title,
+        description: JSON.stringify({
+          desc: inputs.description,
+          filters: {
+            brightness: inputs.brightness,
+            contrast: inputs.contrast,
+            saturation: inputs.saturation,
+            sepia: inputs.sepia,
+          },
+        }),
+        file: inputs.file,
+      };
+      // eslint-disable-next-line max-len
+      const result = await uploadFile(uploadObject, localStorage.getItem('token'));
       console.log('filen lataus onnistui', result);
       // Siirry etusivulle
       setTimeout(() => {
@@ -65,6 +80,7 @@ const Upload = ({history}) => {
 
   return (
     <>
+      <BackButton />
       <Grid container>
         <Grid item>
           <Typography
@@ -138,6 +154,7 @@ const Upload = ({history}) => {
                   contrast(${inputs.contrast}%)
                   saturate(${inputs.saturation}%)
                   sepia(${inputs.sepia}%)`,
+                  width: '100%',
                 }
               }
               src={inputs.dataUrl}
