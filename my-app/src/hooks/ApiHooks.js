@@ -13,7 +13,6 @@ const useAllMedia = () => {
       const response = await fetch(baseUrl + 'media/' + item.file_id);
       return await response.json();
     }));
-    console.log('use all media', items);
     setData(items);
   };
 
@@ -30,6 +29,12 @@ const useSingleMedia = (id) => {
   const fetchUrl = async (fileid) => {
     const response = await fetch(baseUrl + 'media/' + fileid);
     const item = await response.json();
+    if (localStorage.getItem('token') !== null) {
+      const userResponse = await getUser(item.user_id,
+          localStorage.getItem('token'));
+      item.user = userResponse;
+      console.log('usr', item.user);
+    }
     setData(item);
   };
 
@@ -176,6 +181,60 @@ const uploadFile = async (inputs, token) => {
   }
 };
 
+const getUser = async (id, token) => {
+  const fetchOptions = {
+    headers: {
+      'x-access-token': token,
+    },
+  };
+
+  try {
+    const response = await fetch(baseUrl + 'users/' + id, fetchOptions);
+    const json = await response.json();
+    if (!response.ok) throw new Error(json.message + ': ' + json.error);
+    return json;
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
+const deleteFile = async (id) => {
+  const fetchOptions = {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-access-token': localStorage.getItem('token'),
+    },
+  };
+  try {
+    const response = await fetch(baseUrl + 'media/' + id, fetchOptions);
+    const json = await response.json();
+    if (!response.ok) throw new Error(json.message + ': ' + json.error);
+    return json;
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
+
+const modifyFile = async (inputs, id) => {
+  const fetchOptions = {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-access-token': localStorage.getItem('token'),
+    },
+    body: JSON.stringify(inputs),
+  };
+  try {
+    const response = await fetch(baseUrl + 'media/' + id, fetchOptions);
+    const json = await response.json();
+    if (!response.ok) throw new Error(json.message + ': ' + json.error);
+    return json;
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};
+
 export {
   useAllMedia,
   useSingleMedia,
@@ -187,4 +246,7 @@ export {
   updateProfile,
   uploadFile,
   addTag,
+  getUser,
+  deleteFile,
+  modifyFile
 };

@@ -24,7 +24,6 @@ const ProfileForm = ({history}) => {
       setUser(userdata);
     } catch (e) {
       console.log(e.message);
-      // TODO: näytä virhe
     }
   };
 

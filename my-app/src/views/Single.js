@@ -1,21 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {useSingleMedia} from '../hooks/ApiHooks';
-import {Typography, Paper, makeStyles} from '@material-ui/core';
+import {Typography, Paper} from '@material-ui/core';
 import BackButton from '../components/BackButton';
+import Media from '../components/Media';
 
-const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
-
-const useStyles = makeStyles((theme) => ({
-  image: {
-    width: '100%',
-    borderRadius: 4,
-    marginBottom: -3,
-  },
-}));
-
-const Single = ({match, history}) => {
-  const classes = useStyles();
+const Single = ({match}) => {
   // fetch single media based on id from path parameter
   const file = useSingleMedia(match.params.id);
   let description = undefined;
@@ -32,21 +22,19 @@ const Single = ({match, history}) => {
               component="h1"
               variant="h2"
               gutterBottom>{file.title}</Typography>
+            <Typography
+              component="h2"
+              variant="h4"
+              gutterBottom>{description.desc}</Typography>
+            <Typography
+              component="h2"
+              variant="h4"
+              gutterBottom>
+              {file.user ? file.user.username : 'login to see userdata'}
+            </Typography>
             <Paper>
               {description &&
-              <img
-                src={mediaUrl + file.filename}
-                alt={file.title}
-                className={classes.image}
-                style={
-                  {
-                    filter: `brightness(${description.filters.brightness}%)
-                      contrast(${description.filters.contrast}%)
-                      saturate(${description.filters.saturation}%)
-                      sepia(${description.filters.sepia}%)`,
-                  }
-                }
-              />
+              <Media file={file} description={description}/>
               }
             </Paper>
           </>
@@ -57,7 +45,6 @@ const Single = ({match, history}) => {
 
 Single.propTypes = {
   match: PropTypes.object,
-  history: PropTypes.object,
 };
 
 
